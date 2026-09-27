@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spécialisations | Offensive Security Roadmap</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="logo" href="./index.html"><span class="logo-mark">OSR</span><span class="logo-copy"><strong>Offensive Security</strong><small>Professional Roadmap</small></span></a>
+      <nav class="main-nav"><a href="./index.html">Accueil</a><a href="./roadmap.html">Roadmap</a><a class="active" href="./tracks.html">Spécialisations</a><a href="./resources.html">Ressources</a></nav>
+      <a class="header-cta" href="./roadmap.html">Tronc commun</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero simple">
+      <div class="shell narrow">
+        <div class="eyebrow">SPECIALIZATIONS</div>
+        <h1>Choisir une direction après avoir construit le socle.</h1>
+        <p class="lead">Tu peux devenir généraliste solide puis approfondir un domaine. Une spécialisation n’efface jamais les fondamentaux : elle décide surtout où investir le plus de temps.</p>
+      </div>
+    </section>
+
+    <section class="shell section">
+      <div class="track-list">
+        <article class="track-detail recommended">
+          <div class="track-index">01</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">RECOMMANDÉ</span><span class="pill neutral">Polyvalent</span></div><h2>Pentester généraliste</h2><p>Le meilleur point de départ pour quelqu’un qui veut maîtriser Web, systèmes et infrastructure avant de se spécialiser.</p></div>
+          <div class="track-side"><strong>Priorités</strong><ul><li>Roadmap Core complète</li><li>Web + Linux + Windows</li><li>AD + pivoting</li><li>Reporting</li></ul><a href="./roadmap.html">Suivre ce parcours →</a></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">02</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">WEB</span><span class="pill neutral">Applications</span></div><h2>Web & API Pentester</h2><p>Pour ceux qui aiment HTTP, logique métier, APIs, authentification, contrôle d’accès et failles côté serveur.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>HTTP / browser security</li><li>PortSwigger + OWASP</li><li>API / GraphQL</li><li>Auth & business logic</li></ul><span class="when">Choisir après : Foundations + Core Web</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">03</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">ENTERPRISE</span><span class="pill neutral">Identity</span></div><h2>Internal / Active Directory</h2><p>Pour auditer des environnements d’entreprise où identités, permissions, partages, Kerberos et relations AD sont centrales.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>Windows internals</li><li>Kerberos / NTLM</li><li>ACL / AD CS</li><li>Lateral movement</li></ul><span class="when">Choisir après : Windows + Network + Pentest methodology</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">04</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">INFRA</span><span class="pill neutral">Systems</span></div><h2>Infrastructure / Linux</h2><p>Serveurs, services réseau, Linux, permissions, segmentation, accès distant, tunnels et erreurs de configuration.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>Linux internals</li><li>SSH / NFS / SMB / DB</li><li>Network segmentation</li><li>PrivEsc & containers</li></ul><span class="when">Choisir après : Foundations</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">05</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">RED TEAM</span><span class="pill neutral">Multi-host</span></div><h2>Red Team</h2><p>Pour apprendre à atteindre un objectif à travers plusieurs systèmes, avec identité, mouvement latéral, pivoting et compréhension de la détection.</p></div>
+          <div class="track-side"><strong>Prérequis sérieux</strong><ul><li>Core Pentest solide</li><li>AD / Internal</li><li>Attack chains</li><li>Detection-aware operations</li></ul><span class="when">À choisir tard, pas au début</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">06</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">CLOUD</span><span class="pill neutral">Modern infra</span></div><h2>Cloud & Containers</h2><p>Identités cloud, IAM, secrets, Docker, Kubernetes, CI/CD et frontières de confiance d’architectures modernes.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>IAM</li><li>Containers</li><li>Kubernetes RBAC</li><li>CI/CD security</li></ul><span class="when">Choisir après : Linux + Web + Identity basics</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">07</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">LOW LEVEL</span><span class="pill neutral">Binary</span></div><h2>Exploit Development</h2><p>C, assembleur, mémoire, debugging, formats binaires, mitigations et exploitation sur programmes de laboratoire.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>C / memory</li><li>x86-64 assembly</li><li>GDB / WinDbg</li><li>ROP foundations</li></ul><span class="when">Choisir après : programmation + systèmes</span></div>
+        </article>
+
+        <article class="track-detail">
+          <div class="track-index">08</div>
+          <div class="track-main"><div class="tag-row"><span class="pill">PURPLE</span><span class="pill neutral">Detection</span></div><h2>Purple Team</h2><p>Transformer chaque technique offensive en exercice de télémétrie, détection, investigation et durcissement.</p></div>
+          <div class="track-side"><strong>Approfondir</strong><ul><li>MITRE ATT&CK</li><li>Sysmon / EDR</li><li>Sigma</li><li>Detection engineering</li></ul><span class="when">Choisir après : Pentest Core</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="decision-section">
+      <div class="shell">
+        <div class="section-intro light"><div><span class="section-label">DÉCISION RAPIDE</span><h2>Quelle voie correspond à quel intérêt ?</h2></div></div>
+        <div class="decision-grid">
+          <div><b>J’aime HTTP et la logique applicative</b><span>→ Web & API</span></div>
+          <div><b>Je veux auditer les entreprises</b><span>→ Internal / AD</span></div>
+          <div><b>J’aime Linux, réseau et services</b><span>→ Infrastructure</span></div>
+          <div><b>Je veux enchaîner plusieurs systèmes</b><span>→ Red Team</span></div>
+          <div><b>J’aime la mémoire et l’assembleur</b><span>→ Exploit Development</span></div>
+          <div><b>Je travaille avec AWS/Azure/K8s</b><span>→ Cloud & Containers</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Offensive Security Roadmap</strong><p>Le tronc commun reste la base de toutes les spécialisations.</p></div><div class="footer-links"><a href="./index.html">Accueil</a><a href="./roadmap.html">Roadmap</a><a href="./resources.html">Ressources</a></div></div></footer>
+</body>
+</html>
