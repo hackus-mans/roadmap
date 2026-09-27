@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
   pages: write
   id-token: write
 
@@ -17,19 +16,19 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v6
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload static site
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "."
 
