@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Roadmap professionnelle de pentest : systèmes, web/API, Active Directory, infrastructure, cloud, Red Team et exploit development." />
+  <meta name="theme-color" content="#07110f" />
+  <title>Pentest Roadmap — Zero to Professional</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Accueil">
+      <span class="brand-mark">&gt;_</span>
+      <span><strong>Pentest</strong><small>Roadmap</small></span>
+    </a>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#tracks">Parcours</a>
+      <a href="#chains">Attack Chains</a>
+      <a href="#practice">Pratique</a>
+      <a href="#resources">Ressources</a>
+    </nav>
+    <button id="themeToggle" class="icon-button" type="button" aria-label="Changer le thème">◐</button>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-copy">
+        <div class="eyebrow">SYSTEM ADMIN / NETWORK → PROFESSIONAL PENTESTER</div>
+        <h1>Construire un pentester capable de <span>comprendre, enchaîner et démontrer</span> des compromissions réelles.</h1>
+        <p>
+          Une progression complète qui repart des fondations sans traiter l'apprenant comme un débutant absolu :
+          systèmes, réseau, scripting, Web/API, Linux, Windows, Active Directory, pivoting, cloud, attaque en chaîne,
+          détection et reporting professionnel.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#roadmap">Commencer la roadmap</a>
+          <a class="button ghost" href="#tracks">Choisir une spécialisation</a>
+        </div>
+        <div class="hero-note">
+          <span class="status-dot"></span>
+          Principe directeur : <strong>Enumeration &gt; Exploitation</strong> — comprendre l'environnement avant de chercher le raccourci.
+        </div>
+      </div>
+      <div class="terminal" aria-label="Méthodologie pentest">
+        <div class="terminal-bar"><span></span><span></span><span></span><b>operator@roadmap:~</b></div>
+        <pre><code><i>$</i> methodology --full-chain
+
+Recon
+  └─ Enumeration
+      └─ Attack Surface
+          └─ Hypotheses
+              └─ Validation
+                  └─ Initial Access
+                      └─ Privilege Escalation
+                          └─ Credential Access
+                              └─ Lateral Movement
+                                  └─ Pivoting
+                                      └─ Impact
+                                          └─ Reporting
+
+<span>[ mindset ]</span>
+OBSERVATION → HYPOTHÈSE → TEST
+→ RÉSULTAT → INTERPRÉTATION</code></pre>
+      </div>
+    </section>
+
+    <section class="section dashboard" aria-labelledby="dashboard-title">
+      <div class="section-heading">
+        <div><span class="kicker">PROGRESSION</span><h2 id="dashboard-title">Tableau de bord</h2></div>
+        <button id="resetProgress" class="button danger small" type="button">Réinitialiser la progression</button>
+      </div>
+      <div class="metrics">
+        <article class="metric"><span id="overallProgress">0%</span><p>Progression globale</p></article>
+        <article class="metric"><span id="completedTasks">0</span><p>Objectifs validés</p></article>
+        <article class="metric"><span id="totalTasks">0</span><p>Objectifs au total</p></article>
+        <article class="metric"><span id="activeTrackLabel">Généraliste</span><p>Parcours actif</p></article>
+      </div>
+      <div class="progress-shell"><div id="progressBar" class="progress-bar"></div></div>
+      <p class="muted">Les cases cochées sont sauvegardées localement dans ce navigateur. Aucun compte ni serveur n'est nécessaire.</p>
+    </section>
+
+    <section class="section principles">
+      <div class="section-heading">
+        <div><span class="kicker">MINDSET</span><h2>Ce qu'on cherche réellement à maîtriser</h2></div>
+      </div>
+      <div class="principle-grid">
+        <article><b>01</b><h3>Mécanismes avant outils</h3><p>Comprendre le protocole, le service, les permissions, l'authentification et la frontière de confiance avant l'outil qui automatise le test.</p></article>
+        <article><b>02</b><h3>Admin ↔ Attaque ↔ Défense</h3><p>Pour chaque technologie : configuration normale, erreurs de configuration, exploitation en lab, télémétrie, détection et mitigation.</p></article>
+        <article><b>03</b><h3>Chaînes, pas vulnérabilités isolées</h3><p>Apprendre à combiner accès initial, credentials, privilèges, pivoting et mouvement latéral jusqu'à un impact démontrable.</p></article>
+        <article><b>04</b><h3>Preuves et reporting</h3><p>Un pentest professionnel se termine par des preuves reproductibles, une analyse de risque et des recommandations applicables.</p></article>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">CORE ROADMAP</span>
+          <h2>Le parcours complet</h2>
+          <p>Ordre conseillé. Les phases peuvent être accélérées si les compétences sont déjà démontrées par un test pratique.</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Rechercher : Kerberos, API, Linux, pivoting..." />
+        </label>
+        <select id="trackFilter" aria-label="Filtrer par parcours">
+          <option value="all">Toutes les phases</option>
+        </select>
+        <select id="levelFilter" aria-label="Filtrer par niveau">
+          <option value="all">Tous les niveaux</option>
+          <option value="Fondations">Fondations</option>
+          <option value="Intermédiaire">Intermédiaire</option>
+          <option value="Avancé">Avancé</option>
+          <option value="Professionnel">Professionnel</option>
+        </select>
+      </div>
+
+      <div id="roadmapGrid" class="roadmap-grid"></div>
+    </section>
+
+    <section id="tracks" class="section alt-section">
+      <div class="section-heading">
+        <div><span class="kicker">SPECIALIZATIONS</span><h2>Chemins possibles après le tronc commun</h2><p>Il n'existe pas un seul “pentester”. Choisis une direction, garde le tronc commun, puis approfondis.</p></div>
+      </div>
+      <div id="tracksGrid" class="tracks-grid"></div>
+      <div class="decision-tree">
+        <h3>Comment choisir ?</h3>
+        <div class="decision-items">
+          <span>Tu aimes HTTP, logique métier, APIs → <b>Web / API</b></span>
+          <span>Tu veux auditer les entreprises → <b>Internal / Active Directory</b></span>
+          <span>Tu aimes Linux, services, réseau → <b>Infrastructure</b></span>
+          <span>Tu veux enchaîner plusieurs systèmes avec discrétion → <b>Red Team</b></span>
+          <span>Tu aimes mémoire, assembleur, binaires → <b>Exploit Development</b></span>
+          <span>Tu travailles sur AWS/Azure/Kubernetes → <b>Cloud & Containers</b></span>
+          <span>Tu veux attaquer et améliorer la détection → <b>Purple Team</b></span>
+          <span>Tu veux applications Android/iOS → <b>Mobile</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="chains" class="section">
+      <div class="section-heading">
+        <div><span class="kicker">ATTACK CHAINS</span><h2>Apprendre à penser en chemins d'attaque</h2><p>Exemples conceptuels destinés à des labs et environnements explicitement autorisés.</p></div>
+      </div>
+      <div id="chainsGrid" class="chains-grid"></div>
+    </section>
+
+    <section id="practice" class="section alt-section">
+      <div class="section-heading">
+        <div><span class="kicker">PRACTICE SYSTEM</span><h2>La pratique qui transforme les connaissances en compétence</h2></div>
+      </div>
+      <div class="practice-ladder">
+        <article><span>01</span><h3>Guided</h3><p>Cours + lab guidé. Comprendre le mécanisme et reproduire proprement.</p><b>Objectif : compréhension</b></article>
+        <article><span>02</span><h3>Assisted</h3><p>Machine ou challenge avec notes personnelles, documentation permise, pas de walkthrough complet.</p><b>Objectif : méthodologie</b></article>
+        <article><span>03</span><h3>Independent</h3><p>Cible inconnue. Enumeration, hypothèses, exploitation et PrivEsc sans solution.</p><b>Objectif : autonomie</b></article>
+        <article><span>04</span><h3>Multi-host</h3><p>Plusieurs machines, credentials réutilisables, segmentation, AD et pivoting.</p><b>Objectif : attack chain</b></article>
+        <article><span>05</span><h3>Professional</h3><p>Scope, temps limité, preuves, notes, restitution, rapport exécutif et technique.</p><b>Objectif : mission réaliste</b></article>
+      </div>
+
+      <div class="weekly">
+        <h3>Cadence recommandée pour quelqu'un qui travaille</h3>
+        <div class="weekly-grid">
+          <div><b>40%</b><span>Labs / machines</span></div>
+          <div><b>25%</b><span>Fondamentaux & théorie</span></div>
+          <div><b>15%</b><span>Scripting / automatisation</span></div>
+          <div><b>10%</b><span>Notes / writeups</span></div>
+          <div><b>10%</b><span>Reporting / défense</span></div>
+        </div>
+        <p>À 8–12 h/semaine : viser environ 12–18 mois pour bâtir une base très sérieuse. La vitesse dépend des compétences réellement démontrées, pas du nombre de vidéos terminées.</p>
+      </div>
+    </section>
+
+    <section id="resources" class="section">
+      <div class="section-heading">
+        <div><span class="kicker">REFERENCE STACK</span><h2>Ressources de référence</h2><p>Documentation et plateformes reconnues à utiliser comme support — jamais comme substitut au raisonnement.</p></div>
+      </div>
+      <div id="resourcesGrid" class="resources-grid"></div>
+    </section>
+
+    <section class="section final-objective">
+      <div>
+        <span class="kicker">EXIT CRITERIA</span>
+        <h2>Quand peut-on dire “je sais conduire un pentest” ?</h2>
+      </div>
+      <div class="exit-grid">
+        <label><input type="checkbox" data-global-task="exit-linux"><span>Pentester un serveur Linux de l'énumération à root et expliquer chaque étape.</span></label>
+        <label><input type="checkbox" data-global-task="exit-win"><span>Pentester un hôte Windows et obtenir SYSTEM dans un lab autorisé.</span></label>
+        <label><input type="checkbox" data-global-task="exit-web"><span>Auditer une application Web/API avec méthodologie, preuves et remédiations.</span></label>
+        <label><input type="checkbox" data-global-task="exit-ad"><span>Cartographier un domaine AD et identifier plusieurs chemins d'attaque réalistes.</span></label>
+        <label><input type="checkbox" data-global-task="exit-chain"><span>Réaliser une chaîne multi-hôtes avec pivoting et mouvement latéral.</span></label>
+        <label><input type="checkbox" data-global-task="exit-code"><span>Lire, modifier et écrire des scripts utiles au pentest sans dépendre d'une IA.</span></label>
+        <label><input type="checkbox" data-global-task="exit-def"><span>Relier une technique offensive à sa télémétrie, sa détection et sa mitigation.</span></label>
+        <label><input type="checkbox" data-global-task="exit-report"><span>Produire un rapport professionnel compréhensible par technique et direction.</span></label>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Pentest Roadmap</strong> — conçu pour l'apprentissage, les CTFs, labs, environnements personnels et missions explicitement autorisées.</p>
+    <p>Une roadmap n'est pas une checklist magique : la compétence se mesure par ce que tu peux expliquer, diagnostiquer, tester et documenter.</p>
+  </footer>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
