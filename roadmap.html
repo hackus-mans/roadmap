@@ -1,68 +1,23 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roadmap | Offensive Security Roadmap</title>
-  <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="logo" href="./index.html"><span class="logo-mark">OSR</span><span class="logo-copy"><strong>Offensive Security</strong><small>Professional Roadmap</small></span></a>
-      <nav class="main-nav"><a href="./index.html">Accueil</a><a class="active" href="./roadmap.html">Roadmap</a><a href="./tracks.html">Spécialisations</a><a href="./resources.html">Ressources</a></nav>
-      <a class="header-cta" href="#foundations">Start here</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="page-hero">
-      <div class="shell page-hero-grid">
-        <div>
-          <div class="eyebrow">CORE ROADMAP</div>
-          <h1>Le parcours principal, du socle aux chaînes d’attaque.</h1>
-          <p class="lead">Commence ici. Les spécialisations viennent après. Chaque module possède un objectif, des compétences à acquérir, une pratique recommandée et un critère de sortie.</p>
-        </div>
-        <div class="progress-card">
-          <small>PROGRESSION LOCALE</small>
-          <div class="progress-number" id="progressPercent">0%</div>
-          <div class="progress-track"><div id="progressFill"></div></div>
-          <p><span id="doneCount">0</span> critères validés sur <span id="totalCount">0</span></p>
-          <button class="text-button" id="resetProgress">Réinitialiser</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="shell roadmap-layout">
-      <aside class="roadmap-sidebar">
-        <div class="sidebar-box">
-          <small>NAVIGATION</small>
-          <a href="#foundations"><span>01</span> Foundations</a>
-          <a href="#core"><span>02</span> Core Pentest</a>
-          <a href="#enterprise"><span>03</span> Enterprise</a>
-          <a href="#advanced"><span>04</span> Advanced</a>
-        </div>
-        <div class="sidebar-note">
-          <strong>Règle d’accélération</strong>
-          <p>Si tu réussis le critère de sortie d’un module sans assistance, marque-le comme acquis et continue.</p>
-        </div>
-      </aside>
-
-      <section class="roadmap-content">
-        <div class="roadmap-guide">
-          <div><strong>Comment lire la roadmap</strong><p>Les modules marqués <em>CORE</em> appartiennent au tronc commun. Les modules <em>OPTION</em> deviennent importants selon la spécialisation choisie.</p></div>
-          <a href="./tracks.html">Voir les spécialisations →</a>
-        </div>
-        <div id="roadmapRoot"></div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-grid"><div><strong>Offensive Security Roadmap</strong><p>La progression est sauvegardée uniquement dans ton navigateur.</p></div><div class="footer-links"><a href="./index.html">Accueil</a><a href="./tracks.html">Spécialisations</a><a href="./resources.html">Ressources</a></div></div>
-  </footer>
-
-  <script src="./roadmap-data.js"></script>
-  <script src="./app.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lumina Academy — Redirection</title>
+  </head>
+  <body>
+    <p>
+      Ouverture de Lumina Academy… <a href="./index.html#/map">Continuer</a>
+    </p>
+    <script>
+      const old = location.hash.slice(1);
+      location.replace(
+        "./index.html#/map" +
+          (true &&
+          ["foundations", "core", "enterprise", "advanced"].includes(old)
+            ? "/" + old
+            : ""),
+      );
+    </script>
+  </body>
 </html>

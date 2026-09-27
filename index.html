@@ -1,137 +1,40 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Roadmap professionnelle pour passer des fondations systèmes et réseau au pentest Web, infrastructure, Active Directory et Red Team.">
-  <title>Offensive Security Roadmap</title>
-  <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="logo" href="./index.html">
-        <span class="logo-mark">OSR</span>
-        <span class="logo-copy"><strong>Offensive Security</strong><small>Professional Roadmap</small></span>
-      </a>
-      <nav class="main-nav">
-        <a class="active" href="./index.html">Accueil</a>
-        <a href="./roadmap.html">Roadmap</a>
-        <a href="./tracks.html">Spécialisations</a>
-        <a href="./resources.html">Ressources</a>
-      </nav>
-      <a class="header-cta" href="./roadmap.html">Commencer</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero-home">
-      <div class="shell hero-grid">
-        <div>
-          <div class="eyebrow">DE SYSADMIN / RÉSEAU À PENTESTER COMPLET</div>
-          <h1>Une trajectoire claire pour apprendre à <span>compromettre, comprendre et expliquer</span> des systèmes.</h1>
-          <p class="lead">La roadmap reconstruit les fondations utiles, puis progresse vers le Web, Linux, Windows, Active Directory, pivoting, cloud et chaînes d’attaque multi-hôtes — avec une logique de mission professionnelle.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="./roadmap.html">Voir le parcours principal</a>
-            <a class="btn btn-secondary" href="./tracks.html">Explorer les spécialisations</a>
-          </div>
-          <div class="trust-row">
-            <span>✓ Progression structurée</span>
-            <span>✓ Labs avant outils</span>
-            <span>✓ Attack chains</span>
-            <span>✓ Reporting inclus</span>
-          </div>
-        </div>
-        <aside class="hero-panel">
-          <div class="panel-kicker">MÉTHODE DE TRAVAIL</div>
-          <div class="method-step"><span>01</span><div><strong>Observer</strong><small>Ce que la cible révèle réellement.</small></div></div>
-          <div class="method-step"><span>02</span><div><strong>Formuler une hypothèse</strong><small>Quelle faiblesse pourrait exister et pourquoi.</small></div></div>
-          <div class="method-step"><span>03</span><div><strong>Tester proprement</strong><small>Une action minimale qui confirme ou invalide.</small></div></div>
-          <div class="method-step"><span>04</span><div><strong>Interpréter</strong><small>Ce que le résultat permet de déduire ensuite.</small></div></div>
-          <div class="panel-foot">Enumeration &gt; Exploitation</div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="shell section">
-      <div class="section-intro">
-        <div>
-          <span class="section-label">LE PARCOURS EN 4 NIVEAUX</span>
-          <h2>Comprendre le chemin en moins d’une minute</h2>
-        </div>
-        <p>Le site sépare le tronc commun obligatoire des spécialisations. On ne mélange plus tout sur une seule page.</p>
-      </div>
-
-      <div class="stage-grid">
-        <article class="stage-card">
-          <div class="stage-top"><span>01</span><b>FOUNDATIONS</b></div>
-          <h3>Reconstruire les bases utiles</h3>
-          <p>Linux, Windows, réseau, scripting et compréhension des protocoles.</p>
-          <ul><li>Linux administration</li><li>Windows internals</li><li>TCP/IP & services</li><li>Python, Bash, PowerShell</li></ul>
-          <a href="./roadmap.html#foundations">Voir les modules →</a>
-        </article>
-        <article class="stage-card">
-          <div class="stage-top"><span>02</span><b>CORE PENTEST</b></div>
-          <h3>Devenir autonome sur une cible</h3>
-          <p>Recon, Web, systèmes, PrivEsc, preuves et méthodologie.</p>
-          <ul><li>Recon & enumeration</li><li>Web / API fundamentals</li><li>Linux & Windows pentest</li><li>Reporting technique</li></ul>
-          <a href="./roadmap.html#core">Voir les modules →</a>
-        </article>
-        <article class="stage-card">
-          <div class="stage-top"><span>03</span><b>ENTERPRISE</b></div>
-          <h3>Penser réseau interne et identité</h3>
-          <p>Active Directory, services d’entreprise, segmentation, tunnels et mouvement latéral.</p>
-          <ul><li>Kerberos / NTLM / LDAP</li><li>ACL & attack paths</li><li>Pivoting</li><li>Multi-host attack chains</li></ul>
-          <a href="./roadmap.html#enterprise">Voir les modules →</a>
-        </article>
-        <article class="stage-card">
-          <div class="stage-top"><span>04</span><b>ADVANCED</b></div>
-          <h3>Se spécialiser sans perdre le socle</h3>
-          <p>Red Team, cloud, exploit dev, mobile, wireless ou Purple Team.</p>
-          <ul><li>Red Team</li><li>Cloud & containers</li><li>Exploit development</li><li>Purple / detection-aware</li></ul>
-          <a href="./tracks.html">Choisir une voie →</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="contrast-section">
-      <div class="shell">
-        <div class="section-intro light">
-          <div><span class="section-label">COMMENT UTILISER CETTE ROADMAP</span><h2>Pas besoin de tout refaire aveuglément</h2></div>
-          <p>Quelqu’un qui travaille déjà en IT peut accélérer, mais seulement après avoir démontré la compétence.</p>
-        </div>
-        <div class="use-grid">
-          <article><span>1</span><h3>Teste-toi</h3><p>Chaque module a un critère de sortie. Si tu peux le réussir sans aide, passe au suivant.</p></article>
-          <article><span>2</span><h3>Apprends le mécanisme</h3><p>Avant un outil, comprends le protocole, le service, l’identité ou la permission qu’il manipule.</p></article>
-          <article><span>3</span><h3>Pratique en lab</h3><p>Guidé → assisté → indépendant → multi-hôtes. La difficulté augmente volontairement.</p></article>
-          <article><span>4</span><h3>Documente</h3><p>Chaque compromission doit finir avec preuves, impact, cause racine, détection et remédiation.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell section">
-      <div class="section-intro">
-        <div><span class="section-label">POINT D’ARRIVÉE</span><h2>Ce qu’un pentester complet doit savoir faire</h2></div>
-      </div>
-      <div class="outcome-grid">
-        <div class="outcome"><b>01</b><span>Recevoir une cible inconnue et cartographier sa surface d’attaque.</span></div>
-        <div class="outcome"><b>02</b><span>Auditer une application Web ou API avec une méthodologie reproductible.</span></div>
-        <div class="outcome"><b>03</b><span>Obtenir et élever un accès sur Linux ou Windows en comprenant la cause.</span></div>
-        <div class="outcome"><b>04</b><span>Identifier et exploiter un chemin d’attaque Active Directory dans un lab autorisé.</span></div>
-        <div class="outcome"><b>05</b><span>Construire un pivot et enchaîner plusieurs hôtes sans perdre la topologie.</span></div>
-        <div class="outcome"><b>06</b><span>Relier une technique offensive à sa télémétrie, sa détection et sa mitigation.</span></div>
-        <div class="outcome"><b>07</b><span>Modifier ou écrire des scripts utiles sans dépendre d’un outil magique.</span></div>
-        <div class="outcome"><b>08</b><span>Livrer un rapport exploitable par les équipes techniques et la direction.</span></div>
-      </div>
-      <div class="center-cta"><a class="btn btn-primary" href="./roadmap.html">Ouvrir la roadmap complète</a></div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div><strong>Offensive Security Roadmap</strong><p>Pour CTFs, labs, environnements personnels et missions explicitement autorisées.</p></div>
-      <div class="footer-links"><a href="./roadmap.html">Roadmap</a><a href="./tracks.html">Spécialisations</a><a href="./resources.html">Ressources</a></div>
-    </div>
-  </footer>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101c18" />
+    <meta
+      name="description"
+      content="Un parcours guidé pour passer de l’IT au pentest : carte de compétences, prérequis, labs, projets et progression personnelle."
+    />
+    <title>Lumina Academy — Votre chemin vers le pentest</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23101c18'/%3E%3Cpath d='M10 28V12h10v16h10V12' fill='none' stroke='%23c1f17b' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js" defer></script>
+    <script src="./roadmap-data.js" defer></script>
+    <script type="module" src="./assets/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Aller au contenu</a>
+    <div id="app"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <dialog id="onboarding" aria-labelledby="onboard-title"></dialog>
+    <dialog id="account" aria-labelledby="account-title"></dialog>
+    <noscript
+      ><main>
+        <h1>Lumina Academy</h1>
+        <p>
+          Active JavaScript pour explorer la roadmap et enregistrer ta
+          progression.
+        </p>
+        <a href="https://github.com/hackus-mans/roadmap"
+          >Consulter les contenus du dépôt</a
+        >
+      </main></noscript
+    >
+  </body>
 </html>

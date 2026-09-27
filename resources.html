@@ -1,82 +1,24 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ressources | Offensive Security Roadmap</title>
-  <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="logo" href="./index.html"><span class="logo-mark">OSR</span><span class="logo-copy"><strong>Offensive Security</strong><small>Professional Roadmap</small></span></a>
-      <nav class="main-nav"><a href="./index.html">Accueil</a><a href="./roadmap.html">Roadmap</a><a href="./tracks.html">Spécialisations</a><a class="active" href="./resources.html">Ressources</a></nav>
-      <a class="header-cta" href="./roadmap.html">Roadmap</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="page-hero simple">
-      <div class="shell narrow">
-        <div class="eyebrow">REFERENCE STACK</div>
-        <h1>Peu de ressources, mais les bonnes.</h1>
-        <p class="lead">Le but n’est pas d’accumuler 300 liens. Cette page privilégie les références officielles, standards, documentations techniques et plateformes de pratique reconnues.</p>
-      </div>
-    </section>
-
-    <section class="shell section resource-sections">
-      <section class="resource-section">
-        <div class="resource-heading"><span>01</span><div><h2>Systèmes & réseau</h2><p>Comprendre les mécanismes avant de tester leur sécurité.</p></div></div>
-        <div class="resource-cards">
-          <a href="https://man7.org/linux/man-pages/" target="_blank" rel="noreferrer"><strong>Linux man-pages</strong><span>Référence système Linux et API bas niveau.</span><em>Documentation →</em></a>
-          <a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noreferrer"><strong>Microsoft Learn — Windows Server</strong><span>Administration, identité, réseau et services Windows.</span><em>Documentation →</em></a>
-          <a href="https://www.rfc-editor.org/" target="_blank" rel="noreferrer"><strong>RFC Editor</strong><span>Les protocoles Internet à la source.</span><em>Standards →</em></a>
-          <a href="https://www.wireshark.org/docs/" target="_blank" rel="noreferrer"><strong>Wireshark Documentation</strong><span>Analyse réseau, filtres et protocoles.</span><em>Documentation →</em></a>
-        </div>
-      </section>
-
-      <section class="resource-section">
-        <div class="resource-heading"><span>02</span><div><h2>Web & API Security</h2><p>Le cœur de l’apprentissage applicatif pratique.</p></div></div>
-        <div class="resource-cards">
-          <a href="https://portswigger.net/web-security" target="_blank" rel="noreferrer"><strong>PortSwigger Web Security Academy</strong><span>Labs progressifs et documentation Web moderne.</span><em>Labs →</em></a>
-          <a href="https://wstg.owasp.org/" target="_blank" rel="noreferrer"><strong>OWASP WSTG</strong><span>Méthodologie structurée de tests Web.</span><em>Guide →</em></a>
-          <a href="https://owasp.org/www-project-api-security/" target="_blank" rel="noreferrer"><strong>OWASP API Security</strong><span>Risques et méthodologie API.</span><em>Guide →</em></a>
-          <a href="https://developer.mozilla.org/docs/Web/HTTP" target="_blank" rel="noreferrer"><strong>MDN — HTTP</strong><span>Fondamentaux HTTP, headers, cookies et navigateur.</span><em>Documentation →</em></a>
-        </div>
-      </section>
-
-      <section class="resource-section">
-        <div class="resource-heading"><span>03</span><div><h2>Enterprise & Active Directory</h2><p>Identité, relations de confiance et sécurité des environnements d’entreprise.</p></div></div>
-        <div class="resource-cards">
-          <a href="https://learn.microsoft.com/windows-server/identity/ad-ds/" target="_blank" rel="noreferrer"><strong>Microsoft Learn — AD DS</strong><span>Architecture et fonctionnement officiel d’Active Directory.</span><em>Documentation →</em></a>
-          <a href="https://attack.mitre.org/" target="_blank" rel="noreferrer"><strong>MITRE ATT&CK</strong><span>Tactiques, techniques, mitigations et sources de détection.</span><em>Knowledge base →</em></a>
-          <a href="https://lolbas-project.github.io/" target="_blank" rel="noreferrer"><strong>LOLBAS</strong><span>Binaires et scripts Windows natifs pertinents pour la sécurité.</span><em>Reference →</em></a>
-          <a href="https://sigmahq.io/" target="_blank" rel="noreferrer"><strong>Sigma</strong><span>Format de règles de détection portable.</span><em>Detection →</em></a>
-        </div>
-      </section>
-
-      <section class="resource-section">
-        <div class="resource-heading"><span>04</span><div><h2>Pratique offensive</h2><p>Passer de la théorie aux machines et environnements contrôlés.</p></div></div>
-        <div class="resource-cards">
-          <a href="https://academy.hackthebox.com/catalogue/paths" target="_blank" rel="noreferrer"><strong>Hack The Box Academy</strong><span>Parcours modulaires systèmes, Web et pentest.</span><em>Training →</em></a>
-          <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noreferrer"><strong>OverTheWire — Bandit</strong><span>Excellent pour reconstruire les réflexes Linux.</span><em>Wargame →</em></a>
-          <a href="https://pwn.college/" target="_blank" rel="noreferrer"><strong>pwn.college</strong><span>Fondations bas niveau et exploitation binaire.</span><em>Training →</em></a>
-          <a href="https://p.ost2.fyi/" target="_blank" rel="noreferrer"><strong>OpenSecurityTraining2</strong><span>Cours avancés systèmes, reverse et architecture.</span><em>Courses →</em></a>
-        </div>
-      </section>
-
-      <section class="resource-section">
-        <div class="resource-heading"><span>05</span><div><h2>Méthodologie & durcissement</h2><p>Transformer une découverte technique en risque compréhensible et correction utile.</p></div></div>
-        <div class="resource-cards">
-          <a href="https://csrc.nist.gov/pubs/sp/800/115/final" target="_blank" rel="noreferrer"><strong>NIST SP 800-115</strong><span>Guide technique pour tests et évaluations de sécurité.</span><em>Standard →</em></a>
-          <a href="https://www.cisecurity.org/cis-benchmarks" target="_blank" rel="noreferrer"><strong>CIS Benchmarks</strong><span>Références de durcissement pour systèmes et plateformes.</span><em>Hardening →</em></a>
-          <a href="https://www.first.org/cvss/" target="_blank" rel="noreferrer"><strong>FIRST — CVSS</strong><span>Référence officielle du système de scoring CVSS.</span><em>Standard →</em></a>
-          <a href="https://nmap.org/book/man.html" target="_blank" rel="noreferrer"><strong>Nmap Reference Guide</strong><span>Comprendre précisément les options plutôt que copier des commandes.</span><em>Documentation →</em></a>
-        </div>
-      </section>
-    </section>
-  </main>
-
-  <footer class="site-footer"><div class="shell footer-grid"><div><strong>Offensive Security Roadmap</strong><p>Une bonne documentation doit te rendre moins dépendant des walkthroughs.</p></div><div class="footer-links"><a href="./index.html">Accueil</a><a href="./roadmap.html">Roadmap</a><a href="./tracks.html">Spécialisations</a></div></div></footer>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lumina Academy — Redirection</title>
+  </head>
+  <body>
+    <p>
+      Ouverture de Lumina Academy…
+      <a href="./index.html#/resources">Continuer</a>
+    </p>
+    <script>
+      const old = location.hash.slice(1);
+      location.replace(
+        "./index.html#/resources" +
+          (false &&
+          ["foundations", "core", "enterprise", "advanced"].includes(old)
+            ? "/" + old
+            : ""),
+      );
+    </script>
+  </body>
 </html>
