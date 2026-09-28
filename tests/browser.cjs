@@ -73,6 +73,15 @@ const fs = require("node:fs");
     path: ".test-output/map-desktop.png",
     fullPage: true,
   });
+  assert.equal(await page.locator(".graph-edges>path").count(), 42);
+  await page.locator('[data-open-module="foundations-02"]').click();
+  await page.locator("#module-drawer").waitFor({ state: "visible" });
+  assert.match(await page.locator("#drawer-title").textContent(), /Linux/);
+  await page.locator("#module-drawer [data-close]").click();
+  await page.getByRole("button", { name: "Réduire le zoom" }).click();
+  assert.equal(await page.locator("#zoom-label").textContent(), "85 %");
+  await page.getByRole("button", { name: "Ajuster", exact: true }).click();
+
   await page
     .getByRole("searchbox", { name: "Chercher une compétence" })
     .fill("Kerberos");
@@ -131,13 +140,11 @@ const fs = require("node:fs");
   const exported = JSON.parse(fs.readFileSync(file, "utf8"));
   assert.equal(exported.profile.name, "Joseph");
   page.on("dialog", (d) => d.accept());
-  await page
-    .locator("#import-file")
-    .setInputFiles({
-      name: "bad.json",
-      mimeType: "application/json",
-      buffer: Buffer.from("{}"),
-    });
+  await page.locator("#import-file").setInputFiles({
+    name: "bad.json",
+    mimeType: "application/json",
+    buffer: Buffer.from("{}"),
+  });
   await page.waitForFunction(() =>
     document.querySelector("#toast").textContent.includes("Import refusé"),
   );
@@ -158,6 +165,7 @@ const fs = require("node:fs");
   });
   mobile.on("pageerror", (e) => errors.push(e.message));
   for (const route of [
+    "catalog",
     "path",
     "map",
     "module/foundations-01",
@@ -190,7 +198,7 @@ const fs = require("node:fs");
     .getByRole("link", { name: "Carte des compétences", exact: true })
     .click();
   await mobile
-    .getByRole("heading", { name: "Vois le chemin. Choisis ton étape." })
+    .getByRole("heading", { name: "Roadmap Pentester complet" })
     .waitFor();
   assert.equal(
     await mobile
@@ -214,7 +222,7 @@ const fs = require("node:fs");
   assert.match(await blocked.title(), /Lumina/);
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: onboarding, progression, prerequisites, notes, search, filters, export/import, legacy routes, 8 mobile views, navigation and disabled storage. No JS errors.",
+    "PASS: onboarding, progression, prerequisites, notes, search, filters, export/import, legacy routes, 9 mobile views, navigation and disabled storage. No JS errors.",
   );
   await browser.close();
 })().catch((e) => {

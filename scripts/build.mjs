@@ -21,4 +21,8 @@ for (const f of [
   ".nojekyll",
 ])
   await copyFile(f, `dist/${f}`);
-console.log("Static site built in dist/");
+await mkdir("assets", { recursive: true });
+await copyFile("dist/assets/app.js", "assets/app.js");
+console.log(
+  "Static site built in dist/ and root bundle refreshed for Pages branch compatibility.",
+);

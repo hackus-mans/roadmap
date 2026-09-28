@@ -29,3 +29,9 @@ Les exercices restent des objectifs d'apprentissage et d'analyse en laboratoire.
 - Pas de machines hébergées, moteur de cours vidéo ou espace formateur.
 - Authentification préparée, mais non activée et non testée avec un projet réel tant que Lumina Academy n'a pas fourni sa configuration.
 - Sauvegardes cloud explicites et sans fusion automatique ; la progression locale demeure utilisable indépendamment.
+
+## Ajustement après référence roadmap.sh
+
+Accueil remplacé par un catalogue de parcours. La vue carte affiche un graphe acyclique calculé sur les prérequis réels : 22 nœuds, 42 liens, zoom et panneau de module latéral. Les six spécialisations incluent leurs prérequis transitifs. La marque Lumina Academy reste indépendante ; aucun code ni contenu de roadmap.sh n’a été copié.
+
+La recette de publication a révélé deux mécanismes actifs : workflow personnalisé et déploiement Pages depuis la branche. Le bundle est donc versionné à la racine en plus du build dist, pour assurer le fonctionnement des deux sorties.

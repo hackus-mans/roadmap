@@ -115,3 +115,18 @@ test("export/import round trip retains profile, notes, projects and scenarios", 
   assert.equal(r.scenarioNotes[0], s.scenarioNotes[0]);
   assert.deepEqual(r.projects, s.projects);
 });
+
+test("dependency graph positions every node and routes every prerequisite forward", async () => {
+  const { layoutGraph } = await import("../src/graph.js");
+  const g = layoutGraph(modules, byNumber);
+  assert.equal(g.nodes.length, 22);
+  assert.equal(g.edges.length, 42);
+  for (const n of g.nodes) {
+    assert.ok(n.x >= 0);
+    assert.ok(n.x + n.width <= g.width);
+  }
+  for (const e of g.edges) {
+    assert.ok(e.from.y < e.to.y);
+    assert.ok(e.to.m.prereqs.includes(e.from.m.n));
+  }
+});

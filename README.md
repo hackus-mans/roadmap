@@ -6,6 +6,8 @@ Une plateforme d'apprentissage francophone pour les professionnels IT/réseau qu
 
 ## Expérience
 
+L’accueil présente un catalogue de roadmaps par métier. La carte utilise un véritable graphe de 22 compétences et 42 liens de prérequis, avec zoom, survol des relations et panneau latéral. Chaque spécialisation affiche sa sous-roadmap avec tous ses prérequis transitifs.
+
 - Onboarding en trois étapes : expérience, objectif et rythme.
 - Parcours principal avec prochaine compétence disponible, 17 modules essentiels et 5 modules de spécialisation.
 - Carte de compétences interactive, filtres, recherche, vue liste et prérequis explicites.
@@ -36,6 +38,8 @@ Ouvrir http://localhost:4173. Reconstruire après modification. Pas de framework
 
 - `roadmap-data.js` : curriculum initial conservé et compatible avec ses identifiants.
 - `src/curriculum.js` : graphe de prérequis, critères, projets, spécialisations et ateliers.
+- `src/graph.js` : disposition du graphe acyclique et rendu des relations réelles.
+- `assets/app.js` : bundle généré, conservé pour la compatibilité avec la publication Pages depuis la branche.
 - `src/state.js` : validation des données, migration, choix du prochain module et invalidation des dépendances.
 - `src/app.js` : rendu, navigation hash, onboarding et interactions.
 - `src/auth.js` : adaptateur Supabase, connexion PKCE et sauvegardes explicites.
@@ -48,7 +52,7 @@ Ouvrir http://localhost:4173. Reconstruire après modification. Pas de framework
 
 ## Publication
 
-Le workflow `.github/workflows/pages.yml` teste et construit le site puis déploie **dist/** via GitHub Pages. Le workflow de pull request exécute les mêmes tests et le build sans déployer. Les anciens chemins `roadmap.html`, `tracks.html`, `resources.html` et ancres d'étape redirigent vers les nouvelles vues. Les routes hash supportent rechargements et sous-répertoire `/roadmap/`.
+Le workflow `.github/workflows/pages.yml` teste et construit le site puis déploie **dist/** via GitHub Pages. Le dépôt possède également une publication Pages automatique depuis la branche : le bundle `assets/app.js` est donc versionné et rafraîchi par chaque build, pour que les deux mécanismes publient une application fonctionnelle. Recommandation d’administration : sélectionner GitHub Actions comme source unique lorsque cette configuration sera accessible. Le workflow de pull request exécute les mêmes tests et le build sans déployer. Les anciens chemins `roadmap.html`, `tracks.html`, `resources.html` et ancres d'étape redirigent vers les nouvelles vues. Les routes hash supportent rechargements et sous-répertoire `/roadmap/`.
 
 ## Données et confidentialité
 

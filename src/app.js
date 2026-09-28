@@ -1,3 +1,4 @@
+import { renderGraph } from "./graph.js";
 import {
   stages,
   modules,
@@ -48,6 +49,7 @@ const labels = {
 const svg = (path) =>
   `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
 const icons = {
+  catalog: "◇",
   path: svg(
     '<path d="M5 20V6a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0 0 4M5 19h14M9 8h6M9 12h4"/>',
   ),
@@ -121,8 +123,8 @@ function navItem(route, title) {
 }
 function shell() {
   $("#app").innerHTML =
-    `<aside class="sidebar"><a class="brand" href="#/path"><span class="brand-mark" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 30 30" fill="none"><path d="M8 6v19h16v-5H13V6H8Z" fill="currentColor"/><path d="M21 3v8M17 7h8" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="brand-copy">Lumina<small>ACADEMY</small></span></a><div class="workspace-label">L’IT est ton point de départ.</div><nav aria-label="Navigation principale"><small>TON APPRENTISSAGE</small>${navItem("path", "Mon parcours")}${navItem("map", "Carte des compétences")}${navItem("projects", "Projets & jalons")}<small>ALLER PLUS LOIN</small>${navItem("tracks", "Spécialisations")}${navItem("chains", "Attack chains")}${navItem("resources", "Bibliothèque")}</nav><div class="sidebar-bottom"><a class="personal-progress" href="#/progress"><div><span>Ton tronc commun</span><b>${percent()}%</b></div><progress max="${totalCore}" value="${doneCount()}">${percent()}%</progress><small>${doneCount()} / ${totalCore} modules validés</small></a><button class="profile-button" data-action="account"><span class="avatar">${esc((state.profile?.name || "V")[0].toUpperCase())}</span><span><b>${esc(state.profile?.name || "Visiteur")}</b><small>${user ? "Compte connecté" : "Progression sur cet appareil"}</small></span><span aria-hidden="true">↗</span></button></div></aside>
- <div class="layout"><header class="topbar"><button class="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false" data-action="menu">☰</button><a class="mobile-brand" href="#/path">Lumina <span>Academy</span></a><span class="breadcrumb">Espace d’apprentissage <span>/</span> <b id="route-label">Mon parcours</b></span><div class="top-actions"><a class="github-link" href="https://github.com/hackus-mans/roadmap" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="button small outline" data-action="account">${user ? "Mon compte" : "Mon espace"}</button></div></header><main id="main"></main><footer>Lumina Academy <span>Comprendre. Pratiquer. Démontrer.</span><a href="#/progress">Données & sauvegarde</a></footer></div>`;
+    `<aside class="sidebar"><a class="brand" href="#/catalog"><span class="brand-mark" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 30 30" fill="none"><path d="M8 6v19h16v-5H13V6H8Z" fill="currentColor"/><path d="M21 3v8M17 7h8" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="brand-copy">Lumina<small>ACADEMY</small></span></a><div class="workspace-label">L’IT est ton point de départ.</div><nav aria-label="Navigation principale"><small>TON APPRENTISSAGE</small>${navItem("catalog", "Toutes les roadmaps")}${navItem("path", "Mon parcours")}${navItem("map", "Carte des compétences")}${navItem("projects", "Projets & jalons")}<small>ALLER PLUS LOIN</small>${navItem("tracks", "Spécialisations")}${navItem("chains", "Attack chains")}${navItem("resources", "Bibliothèque")}</nav><div class="sidebar-bottom"><a class="personal-progress" href="#/progress"><div><span>Ton tronc commun</span><b>${percent()}%</b></div><progress max="${totalCore}" value="${doneCount()}">${percent()}%</progress><small>${doneCount()} / ${totalCore} modules validés</small></a><button class="profile-button" data-action="account"><span class="avatar">${esc((state.profile?.name || "V")[0].toUpperCase())}</span><span><b>${esc(state.profile?.name || "Visiteur")}</b><small>${user ? "Compte connecté" : "Progression sur cet appareil"}</small></span><span aria-hidden="true">↗</span></button></div></aside>
+ <div class="layout"><header class="topbar"><button class="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false" data-action="menu">☰</button><a class="mobile-brand" href="#/catalog">Lumina <span>Academy</span></a><nav class="public-nav" aria-label="Navigation roadmaps"><a href="#/catalog">Roadmaps</a><a href="#/path">Mon parcours</a><a href="#/projects">Projets</a><a href="#/resources">Ressources</a></nav><span class="breadcrumb">Espace d’apprentissage <span>/</span> <b id="route-label">Mon parcours</b></span><div class="top-actions"><a class="github-link" href="https://github.com/hackus-mans/roadmap" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="button small outline" data-action="account">${user ? "Mon compte" : "Mon espace"}</button></div></header><main id="main"></main><footer>Lumina Academy <span>Comprendre. Pratiquer. Démontrer.</span><a href="#/progress">Données & sauvegarde</a></footer></div>`;
 }
 function moduleCard(m) {
   return `<a class="module-row ${status(state, m, byNumber)}" href="#/module/${m.id}"><span class="module-number">${completed(state, m) ? "✓" : m.n}</span><div><strong>${esc(m.title)}</strong><p>${esc(m.summary)}</p></div><div class="module-row-meta">${badge(m)}<small>${esc(m.duration)}</small></div><span class="arrow" aria-hidden="true">↗</span></a>`;
@@ -146,11 +148,24 @@ function pathPage() {
  <section class="section current-section"><div><div class="section-title"><div><span class="eyebrow">${s.label} / ${esc(s.title)}</span><h2>${state.profile ? "À travailler maintenant" : "Commence par des bases durables"}</h2></div></div><div class="module-list">${phaseModules.slice(0, 5).map(moduleCard).join("")}</div></div><aside class="mentor-card"><span class="mentor-icon">✳</span><h3>Tu sais déjà le faire ?<br>Démontre-le.</h3><p>Ton expérience compte. Ouvre le module, vérifie ses critères et joins une preuve de maîtrise. Tu peux avancer sans refaire tout le cours.</p><hr><small>NOTRE MÉTHODE</small><p class="method">Observer → Formuler une hypothèse → Tester → Interpréter</p><a href="#/projects">Construire mon portfolio →</a></aside></section>
  <section class="next-banner"><div><span class="eyebrow">APRÈS LE SOCLE</span><h2>${chosen ? `Ton cap : ${chosen.title}.` : "Un tronc commun. Plusieurs futurs."}</h2><p>${chosen ? chosen.desc : "Web, infrastructure, cloud, bas niveau, Red Team ou Purple Team."}</p></div><a class="button outline" href="#/tracks">Trouver ma spécialisation ↗</a></section>`;
 }
+let trackFilter = null;
+function trackNumbers(id) {
+  const t = tracks.find((t) => t.id === id),
+    result = new Set();
+  function add(n) {
+    if (result.has(n)) return;
+    result.add(n);
+    byNumber[n].prereqs.forEach(add);
+  }
+  t?.requires.forEach(add);
+  return result;
+}
 function filteredModules() {
   const q = search.trim().toLocaleLowerCase("fr");
   return modules.filter(
     (m) =>
       (stageFilter === "all" || m.stage === stageFilter) &&
+      (!trackFilter || trackNumbers(trackFilter).has(m.n)) &&
       (filter === "all" || status(state, m, byNumber) === filter) &&
       (!q ||
         [m.title, m.summary, ...m.learn]
@@ -165,22 +180,11 @@ function mapResults() {
     return '<div class="empty"><h2>Aucun module trouvé</h2><p>Essaie un autre mot ou retire les filtres.</p><button class="button outline" data-action="clear-filters">Réinitialiser les filtres</button></div>';
   if (mapView === "list")
     return `<div class="module-list">${list.map(moduleCard).join("")}</div>`;
-  return `<div class="skill-map">${stages
-    .filter((s) => list.some((m) => m.stage === s.id))
-    .map(
-      (s) =>
-        `<section class="map-stage"><div class="map-stage-title"><span>${s.label}</span><h2>${esc(s.title)}</h2><small>${list.filter((m) => m.stage === s.id).length} modules</small></div><div class="map-nodes">${list
-          .filter((m) => m.stage === s.id)
-          .map(
-            (m) =>
-              `<a class="skill-node ${status(state, m, byNumber)}" href="#/module/${m.id}"><div class="node-top"><small>${m.n} · ${m.type === "CORE" ? "TRONC COMMUN" : "SPÉCIALISATION"}</small><span>${completed(state, m) ? "✓" : "↗"}</span></div><h3>${esc(m.title)}</h3><div class="dependencies">${m.prereqs.length ? "Après " + m.prereqs.map((n) => `<span title="${esc(byNumber[n].title)}">${n}</span>`).join(" ") : "Point de départ"}</div>${badge(m)}</a>`,
-          )
-          .join("")}</div></section>`,
-    )
-    .join("")}</div>`;
+  return renderGraph(list, byNumber, (m) => status(state, m, byNumber), esc);
 }
+
 function mapPage() {
-  return `${heading("LA CARTE DES COMPÉTENCES", "Vois le chemin. Choisis ton étape.", "Chaque carte ouvre un module. Les numéros « Après » indiquent ses prérequis ; tu peux explorer librement, puis valider dans l’ordre des dépendances.")}<div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Chercher une compétence…" value="${esc(search)}" aria-label="Chercher une compétence"></label><label class="sr-only" for="status-filter">Statut</label><select id="status-filter"><option value="all">Tous les statuts</option>${Object.entries(
+  return `${heading("LA CARTE DES COMPÉTENCES", trackFilter ? tracks.find((t) => t.id === trackFilter).title : "Roadmap Pentester complet", "Chaque carte ouvre un module. Les liens indiquent les prérequis. Clique sur une compétence pour ouvrir ses objectifs, ses ressources et sa validation sans quitter la carte.")}<div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Chercher une compétence…" value="${esc(search)}" aria-label="Chercher une compétence"></label><label class="sr-only" for="status-filter">Statut</label><select id="status-filter"><option value="all">Tous les statuts</option>${Object.entries(
     labels,
   )
     .map(
@@ -189,7 +193,7 @@ function mapPage() {
     )
     .join(
       "",
-    )}</select><div class="segmented"><button data-view="map" aria-pressed="${mapView === "map"}">Carte</button><button data-view="list" aria-pressed="${mapView === "list"}">Liste</button></div></div><div class="filter-tabs" role="group" aria-label="Filtrer par étape"><button data-stage="all" aria-pressed="${stageFilter === "all"}">Tout le parcours</button>${stages.map((s) => `<button data-stage="${s.id}" aria-pressed="${stageFilter === s.id}">${s.label} ${esc(s.title)}</button>`).join("")}</div><p class="map-legend"><span><i class="green-dot"></i> Validé</span><span><i class="amber-dot"></i> Disponible / en cours</span><span><i class="gray-dot"></i> Prérequis à acquérir</span></p><div id="map-results">${mapResults()}</div>`;
+    )}</select><div class="segmented"><button data-view="map" aria-pressed="${mapView === "map"}">Carte</button><button data-view="list" aria-pressed="${mapView === "list"}">Liste</button></div></div><div class="filter-tabs" role="group" aria-label="Filtrer par étape"><button data-stage="all" aria-pressed="${stageFilter === "all"}">Tout le parcours</button>${stages.map((s) => `<button data-stage="${s.id}" aria-pressed="${stageFilter === s.id}">${s.label} ${esc(s.title)}</button>`).join("")}</div><p class="map-legend"><span><i class="green-dot"></i> Validé</span><span><i class="amber-dot"></i> Tronc commun</span><span><i class="purple-dot"></i> Spécialisation</span></p><div id="map-results">${mapResults()}</div>`;
 }
 function modulePage(id) {
   const m = byId[id];
@@ -203,7 +207,7 @@ function tracksPage() {
   return `${heading("CHOISIR SA DIRECTION", "Le socle t’ouvre des portes.", "Les spécialisations sont des branches, pas une course à tout maîtriser. Choisis celle qui correspond aux systèmes que tu veux comprendre et auditer.")}<div class="track-grid">${tracks
     .map((t) => {
       const req = t.requires.filter((n) => !completed(state, byNumber[n]));
-      return `<article class="track-card"><span class="track-icon">${t.icon}</span><span class="tag">${req.length ? "À PRÉPARER" : "PRÊT À APPROFONDIR"}</span><h2>${t.title}</h2><p>${t.desc}</p><ul>${t.focus.map((f) => `<li>${f}</li>`).join("")}</ul><div class="track-project"><small>PROJET DE SPÉCIALISATION</small><p>${t.project}</p></div><h3>Compétences nécessaires</h3><div class="resource-links">${t.requires.map((n) => link(byNumber[n], `${completed(state, byNumber[n]) ? "✓ " : ""}${byNumber[n].title}`)).join("")}</div><a class="text-link" href="#/module/${byNumber[req[0] || t.requires[0]].id}">${req.length ? "Travailler le prochain prérequis" : "Revoir les acquis"} →</a></article>`;
+      return `<article class="track-card"><span class="track-icon">${esc(t.icon)}</span><span class="tag">${req.length ? "À PRÉPARER" : "PRÊT À APPROFONDIR"}</span><h2>${t.title}</h2><p>${t.desc}</p><ul>${t.focus.map((f) => `<li>${f}</li>`).join("")}</ul><div class="track-project"><small>PROJET DE SPÉCIALISATION</small><p>${t.project}</p></div><h3>Compétences nécessaires</h3><div class="resource-links">${t.requires.map((n) => link(byNumber[n], `${completed(state, byNumber[n]) ? "✓ " : ""}${byNumber[n].title}`)).join("")}</div><a class="text-link" href="#/module/${byNumber[req[0] || t.requires[0]].id}">${req.length ? "Travailler le prochain prérequis" : "Revoir les acquis"} →</a></article>`;
     })
     .join("")}</div>`;
 }
@@ -239,9 +243,14 @@ function progressPage() {
 function notFound() {
   return `${heading("PAGE INTROUVABLE", "Ce chemin n’existe pas.", "Reviens à la carte pour retrouver ton prochain module.")}<a class="button primary" href="#/map">Ouvrir la carte →</a>`;
 }
+function centerGraph() {
+  const viewport = $(".graph-viewport");
+  if (viewport)
+    viewport.scrollLeft = Math.max(0, (1080 - viewport.clientWidth) / 2);
+}
 function render(focus = false) {
   const parts = location.hash.replace(/^#\/?/, "").split("/"),
-    route = parts[0] || "path",
+    route = parts[0] || "catalog",
     id = parts[1];
   if (["foundations", "core", "enterprise", "advanced"].includes(route)) {
     location.replace("#/map/" + route);
@@ -249,8 +258,20 @@ function render(focus = false) {
   }
   if (route === "map" && id && stages.some((s) => s.id === id))
     stageFilter = id;
+  trackFilter =
+    route === "map" &&
+    id?.startsWith("track-") &&
+    tracks.some((t) => t.id === id.slice(6))
+      ? id.slice(6)
+      : null;
+  if (trackFilter) stageFilter = "all";
+  document.body.classList.toggle(
+    "public-layout",
+    ["catalog", "map"].includes(route),
+  );
   shell();
   const pages = {
+    catalog: catalogPage,
     path: pathPage,
     map: mapPage,
     module: () => modulePage(id),
@@ -261,7 +282,9 @@ function render(focus = false) {
     progress: progressPage,
   };
   $("#main").innerHTML = (pages[route] || notFound)();
+  centerGraph();
   const routeNames = {
+    catalog: "Roadmaps cybersécurité",
     path: "Mon parcours",
     map: "Carte des compétences",
     module: byId[id]?.title || "Module",
@@ -276,6 +299,7 @@ function render(focus = false) {
   document
     .querySelector(`[data-nav="${route === "module" ? "map" : route}"]`)
     ?.setAttribute("aria-current", "page");
+  if ($("#module-drawer")?.open && drawerModule) drawModule(drawerModule);
   if (focus) {
     window.scrollTo({ top: 0 });
     $("#main h1")?.focus({ preventScroll: true });
@@ -359,6 +383,33 @@ function updateValidation(id) {
   }
 }
 document.addEventListener("click", async (e) => {
+  const node = e.target.closest("[data-open-module]");
+  if (node) openModule(node.dataset.openModule);
+  const zoom = e.target.closest("[data-zoom]");
+  if (zoom) {
+    const viewport = $(".graph-viewport"),
+      canvas = $(".graph-canvas");
+    if (viewport && canvas) {
+      const current = Number(canvas.dataset.zoom || 1);
+      const value =
+        zoom.dataset.zoom === "fit"
+          ? Math.min(1, (viewport.clientWidth - 24) / 1080)
+          : Math.max(
+              0.3,
+              Math.min(
+                1.5,
+                current + (zoom.dataset.zoom === "in" ? 0.15 : -0.15),
+              ),
+            );
+      canvas.dataset.zoom = value;
+      canvas.style.transform = `scale(${value})`;
+      $(".graph-scaler").style.width = 1080 * value + "px";
+      $(".graph-scaler").style.height =
+        parseFloat(canvas.style.height) * value + "px";
+      $("#zoom-label").textContent = Math.round(value * 100) + " %";
+    }
+  }
+
   const close = e.target.closest("[data-close]");
   if (close) $("#" + close.dataset.close).close();
   const a = e.target.closest("[data-action]");
@@ -448,6 +499,7 @@ document.addEventListener("click", async (e) => {
   }
   const stage = e.target.closest("[data-stage]");
   if (stage) {
+    trackFilter = null;
     stageFilter = stage.dataset.stage;
     history.replaceState(null, "", "#/map");
     render();
@@ -497,6 +549,7 @@ document.addEventListener("input", (e) => {
   if (el.id === "search") {
     search = el.value;
     $("#map-results").innerHTML = mapResults();
+    centerGraph();
   }
   if (el.id === "resource-search") {
     let count = 0;
@@ -542,6 +595,7 @@ document.addEventListener("change", async (e) => {
   if (el.id === "status-filter") {
     filter = el.value;
     $("#map-results").innerHTML = mapResults();
+    centerGraph();
   }
   if (el.dataset.check) {
     const id = el.dataset.check;
@@ -628,6 +682,7 @@ document.addEventListener("submit", async (e) => {
   }
 });
 window.addEventListener("hashchange", () => {
+  $("#module-drawer")?.close();
   document.body.classList.remove("menu-open");
   render(true);
 });
@@ -646,6 +701,43 @@ document.addEventListener("keydown", (e) => {
     $(".mobile-menu")?.setAttribute("aria-expanded", "false");
   }
 });
+let drawerModule = null;
+const drawer = document.createElement("dialog");
+drawer.id = "module-drawer";
+drawer.setAttribute("aria-labelledby", "drawer-title");
+document.body.append(drawer);
+drawer.addEventListener("close", () => {
+  drawerModule = null;
+});
+function drawModule(id) {
+  drawer.innerHTML = `<button class="dialog-close" data-close="module-drawer" aria-label="Fermer la fiche">×</button><div class="drawer-content">${modulePage(id)}</div>`;
+  drawer.querySelector("h1").id = "drawer-title";
+}
+function openModule(id) {
+  if (!byId[id]) return;
+  drawerModule = id;
+  drawModule(id);
+  drawer.showModal();
+  drawer.scrollTop = 0;
+}
+document.addEventListener("pointerover", (e) => {
+  const node = e.target.closest("[data-open-module]");
+  if (!node) return;
+  document
+    .querySelectorAll(".graph-edges path[data-from]")
+    .forEach((line) =>
+      line.classList.toggle(
+        "highlight",
+        line.dataset.from === node.dataset.openModule ||
+          line.dataset.to === node.dataset.openModule,
+      ),
+    );
+});
+function catalogPage() {
+  return `<section class="catalog-hero"><span class="catalog-kicker">LUMINA ACADEMY / LEARNING PATHS</span><h1 tabindex="-1">Ta prochaine compétence.<br><em>Le chemin pour y arriver.</em></h1><p>Des roadmaps visuelles pour apprendre la cybersécurité.<br>Comprends les liens, choisis ton parcours, construis tes compétences.</p><div class="catalog-actions"><a class="button primary" href="#/map">Explorer la roadmap pentester <span>→</span></a><button class="button outline" data-action="onboard">Construire mon parcours</button></div><div class="catalog-pills"><span>↗ Interactif</span><span>✓ Progression sauvegardée</span><span>◇ Accessible sans compte</span></div></section>
+<section class="catalog-section"><div class="catalog-section-title"><h2>Roadmaps par métier</h2><span>Le tronc commun, puis ta spécialité.</span></div><div class="catalog-grid"><a class="catalog-card featured" href="#/map"><div><span class="catalog-card-icon">⌁</span><span class="catalog-label">COMMENCER ICI</span></div><h3>Pentester complet</h3><p>Des fondations aux systèmes, au Web et aux environnements d’entreprise.</p><footer><span>22 modules · 4 étapes</span><b>↗</b></footer></a>${tracks.map((t) => `<a class="catalog-card" href="#/map/track-${t.id}"><div><span class="catalog-card-icon">${esc(t.icon)}</span><span class="catalog-label">SPÉCIALISATION</span></div><h3>${t.title}</h3><p>${t.desc}</p><footer><span>Prérequis + compétences métier</span><b>↗</b></footer></a>`).join("")}</div></section>
+<section class="catalog-section"><div class="catalog-section-title"><h2>Explore une compétence</h2><span>Des bases solides avant les outils.</span></div><div class="skill-chips">${["02", "03", "04", "05", "08", "10", "13", "15", "17", "18", "19", "22"].map((n) => `<button data-open-module="${byNumber[n].id}">${esc(byNumber[n].title)} <span>↗</span></button>`).join("")}</div></section><section class="catalog-bottom"><div><span class="eyebrow">APPRENDRE AVEC UNE DIRECTION</span><h2>Tu n’as pas besoin de tout apprendre à la fois.</h2><p>Une carte pour comprendre. Un parcours pour avancer. Des projets pour démontrer.</p></div><a class="button outline" href="#/path">${state.profile ? "Reprendre mon parcours" : "Découvrir le parcours guidé"} →</a></section>`;
+}
 render();
 if (auth.configured)
   auth
