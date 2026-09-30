@@ -1,7 +1,8 @@
 import { build } from "esbuild";
 import { mkdir, copyFile, rm, cp } from "node:fs/promises";
 await rm("dist", { recursive: true, force: true });
-await mkdir("dist/assets", { recursive: true });\nawait cp("src", "dist/src", { recursive: true });
+await mkdir("dist/assets", { recursive: true });
+await cp("src", "dist/src", { recursive: true });
 await build({
   entryPoints: ["src/app.js"],
   bundle: true,
