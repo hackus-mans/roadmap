@@ -379,7 +379,7 @@ export const stages=[
 }
 ];
 
-export const modules=stages.flatMap(s=>s.modules.map(m=>({...m,id:\`\${s.id}-\${m.n}\`,stage:s.id,stageTitle:s.title})));
+export const modules=stages.flatMap(s=>s.modules.map(m=>({...m,id:`${s.id}-${m.n}`,stage:s.id,stageTitle:s.title})));
 export const byNumber=Object.fromEntries(modules.map(m=>[m.n,m]));
 export const byId=Object.fromEntries(modules.map(m=>[m.id,m]));
 
