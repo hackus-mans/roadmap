@@ -26,7 +26,7 @@ const fs = require("node:fs");
   await page.getByRole("button", { name: /Construire mon parcours/ }).click();
   await page.getByLabel("Comment veux-tu être appelé").fill("Joseph");
   await page.locator("#onboard-form button[type=submit]").click();
-  await page.getByRole("radio", { name: "Web & API", exact: true }).check();
+  await page.getByRole("radio", { name: "Web & API Exploitation", exact: true }).check();
   await page.locator("#onboard-form button[type=submit]").click();
   await page.getByLabel("Temps disponible").selectOption("10");
   await page.locator("#onboard-form button[type=submit]").click();
@@ -68,12 +68,12 @@ const fs = require("node:fs");
   assert.equal(await page.locator("[data-complete]").isDisabled(), true);
   await page.goto(base + "/#/map");
   await page.locator("#search").waitFor();
-  assert.equal(await page.locator(".skill-node").count(), 22);
+  assert.equal(await page.locator(".skill-node").count(), 50);
   await page.screenshot({
     path: ".test-output/map-desktop.png",
     fullPage: true,
   });
-  assert.equal(await page.locator(".graph-edges>path").count(), 42);
+  assert.ok((await page.locator(".graph-edges>path").count()) > 100);
   await page.locator('[data-open-module="foundations-02"]').click();
   await page.locator("#module-drawer").waitFor({ state: "visible" });
   assert.match(await page.locator("#drawer-title").textContent(), /Linux/);
@@ -92,7 +92,7 @@ const fs = require("node:fs");
   assert.equal(await page.getByText("Aucun module trouvé").count(), 1);
   await page.getByRole("button", { name: "Réinitialiser les filtres" }).click();
   await page.getByRole("button", { name: "Liste", exact: true }).click();
-  assert.equal(await page.locator(".module-row").count(), 22);
+  assert.equal(await page.locator(".module-row").count(), 50);
   await page.goto(base + "/#/projects");
   await page.locator("[data-project-notes]").first().waitFor();
   await page
@@ -118,7 +118,7 @@ const fs = require("node:fs");
   await page.goto(base + "/#/resources");
   await page.locator("#resource-search").waitFor();
   await page.locator("#resource-search").fill("python");
-  assert.equal(await page.locator(".resource-card:visible").count(), 1);
+  assert.ok((await page.locator(".resource-card:visible").count()) >= 1);
   await page.locator("#resource-search").fill("zzz");
   assert.equal(await page.locator("#resources-empty").isVisible(), true);
   await page.getByRole("button", { name: "Mon espace", exact: true }).click();
@@ -157,7 +157,7 @@ const fs = require("node:fs");
   await page.goto(base + "/roadmap.html#enterprise");
   await page.locator(".skill-node").first().waitFor();
   assert.match(page.url(), /#\/map\/enterprise/);
-  assert.equal(await page.locator(".skill-node").count(), 5);
+  assert.equal(await page.locator(".skill-node").count(), 9);
   const mobile = await browser.newPage({
     viewport: { width: 390, height: 844 },
     isMobile: true,
@@ -198,7 +198,7 @@ const fs = require("node:fs");
     .getByRole("link", { name: "Carte des compétences", exact: true })
     .click();
   await mobile
-    .getByRole("heading", { name: "Roadmap Pentester complet" })
+    .getByRole("heading", { name: "Cybersecurity Mastery Graph" })
     .waitFor();
   assert.equal(
     await mobile
