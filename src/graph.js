@@ -13,16 +13,21 @@ export function layoutGraph(list, allByNumber) {
   }
   list.forEach(rank);
   const levels = [...new Set(ranks.values())].sort((a, b) => a - b);
-  const width = 1080,
-    nodeWidth = 222,
+  const nodeWidth = 222,
     nodeHeight = 106,
-    rowHeight = 178;
+    rowHeight = 178,
+    gap = 36;
+  const maxPerRow = Math.max(
+    1,
+    ...levels.map((level) => list.filter((m) => ranks.get(m.n) === level).length),
+  );
+  const width = Math.max(1080, maxPerRow * (nodeWidth + gap) + 160);
   const nodes = list.map((m) => {
     const row = list.filter((x) => ranks.get(x.n) === ranks.get(m.n)),
       index = row.indexOf(m);
     return {
       m,
-      x: width / 2 + (index - (row.length - 1) / 2) * 258 - nodeWidth / 2,
+      x: width / 2 + (index - (row.length - 1) / 2) * (nodeWidth + gap) - nodeWidth / 2,
       y: 65 + ranks.get(m.n) * rowHeight,
       width: nodeWidth,
       height: nodeHeight,
