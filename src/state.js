@@ -19,9 +19,9 @@ export function sanitize(raw, modules) {
   if (raw.profile && typeof raw.profile === "object")
     out.profile = {
       name: String(raw.profile.name || "").slice(0, 40),
-      hours: [3, 5, 10, 15].includes(Number(raw.profile.hours))
+      hours: [5, 10, 15, 20, 25].includes(Number(raw.profile.hours))
         ? Number(raw.profile.hours)
-        : 5,
+        : 20,
       goal: String(raw.profile.goal || "general").slice(0, 30),
       level: ["restart", "it", "security"].includes(raw.profile.level)
         ? raw.profile.level
@@ -40,17 +40,15 @@ export function sanitize(raw, modules) {
         updatedAt: typeof p.updatedAt === "string" ? p.updatedAt : null,
       };
   }
-  for (const id of ["lab", "audit", "enterprise"])
-    if (raw.projects?.[id])
+  for (const [id, p] of Object.entries(raw.projects || {}))
+    if (/^[a-z0-9-]{1,80}$/i.test(id) && p && typeof p === "object")
       out.projects[id] = {
-        checks: Array.from(
-          { length: 4 },
-          (_, i) => raw.projects[id].checks?.[i] === true,
-        ),
-        notes: String(raw.projects[id].notes || "").slice(0, 10000),
+        checks: Array.from({ length: 4 }, (_, i) => p.checks?.[i] === true),
+        notes: String(p.notes || "").slice(0, 10000),
       };
-  for (let i = 0; i < 3; i++)
-    out.scenarioNotes[i] = String(raw.scenarioNotes?.[i] || "").slice(0, 10000);
+  for (const [i, note] of Object.entries(raw.scenarioNotes || {}))
+    if (/^\d{1,3}$/.test(i))
+      out.scenarioNotes[i] = String(note || "").slice(0, 10000);
   out.updatedAt = typeof raw.updatedAt === "string" ? raw.updatedAt : null;
   return out;
 }
