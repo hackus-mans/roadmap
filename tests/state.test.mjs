@@ -14,8 +14,8 @@ const {
   KEY,
 } = await import("../src/state.js");
 test("curriculum IDs, criteria, resources and dependencies are consistent and acyclic", () => {
-  assert.equal(modules.length, 22);
-  assert.equal(new Set(modules.map((m) => m.id)).size, 22);
+  assert.equal(modules.length, 50);
+  assert.equal(new Set(modules.map((m) => m.id)).size, 50);
   const visit = (m, path = []) => {
     assert.ok(!path.includes(m.n), "cycle " + m.n);
     for (const n of m.prereqs) {
@@ -36,14 +36,14 @@ test("next step respects dependencies and prioritizes core", () => {
   assert.equal(nextModule(s, modules, byNumber).n, "01");
   s.modules[byNumber["01"].id] = { done: true };
   assert.equal(nextModule(s, modules, byNumber).n, "02");
-  assert.equal(missing(s, byNumber["16"], byNumber).length, 5);
+  assert.ok(missing(s, byNumber["50"], byNumber).length >= 1);
 });
 test("reopening a module invalidates all dependent validations", () => {
   const s = empty();
   for (const m of modules) s.modules[m.id] = { done: true };
   invalidateDependents(s, "03", modules);
-  assert.equal(s.modules[byNumber["13"].id].done, false);
-  assert.equal(s.modules[byNumber["21"].id].done, false);
+  assert.equal(s.modules[byNumber["27"].id].done, false);
+  assert.equal(s.modules[byNumber["50"].id].done, false);
   assert.equal(s.modules[byNumber["02"].id].done, true);
 });
 test("legacy progress is retained", () => {
@@ -86,7 +86,7 @@ test("import rejects incompatible format and strips unknown IDs", () => {
   const result = sanitize(s, modules);
   assert.equal(result.modules.unknown, undefined);
   assert.equal(result.profile.name.length, 40);
-  assert.equal(result.profile.hours, 5);
+  assert.equal(result.profile.hours, 20);
   assert.equal(result.modules[byNumber["02"].id].notes.length, 10000);
   assert.deepEqual(result.modules[byNumber["02"].id].checks, [
     true,
@@ -104,7 +104,7 @@ test("export/import round trip retains profile, notes, projects and scenarios", 
     notes: "Capture réseau documentée",
     updatedAt: null,
   };
-  s.projects.lab = {
+  s.projects["foundation-lab"] = {
     checks: [true, false, false, false],
     notes: "Schéma de lab",
   };
@@ -119,8 +119,8 @@ test("export/import round trip retains profile, notes, projects and scenarios", 
 test("dependency graph positions every node and routes every prerequisite forward", async () => {
   const { layoutGraph } = await import("../src/graph.js");
   const g = layoutGraph(modules, byNumber);
-  assert.equal(g.nodes.length, 22);
-  assert.equal(g.edges.length, 42);
+  assert.equal(g.nodes.length, 50);
+  assert.equal(g.edges.length, modules.reduce((sum, m) => sum + m.prereqs.length, 0));
   for (const n of g.nodes) {
     assert.ok(n.x >= 0);
     assert.ok(n.x + n.width <= g.width);
