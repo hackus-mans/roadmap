@@ -1,29 +1,55 @@
-# Lumina Academy · Roadmap cybersécurité
+# Lumina Cyber Mastery · Personal Roadmap
 
-Une plateforme d'apprentissage francophone pour les professionnels IT/réseau qui reprennent les fondations et construisent des compétences en pentest.
+Une plateforme de progression construite comme une **roadmap personnelle de très long terme** : fondations système, programmation, pentest professionnel, Web/API, Active Directory, Red Team, Purple Team, engineering et recherche.
 
 **Site : https://hackus-mans.github.io/roadmap/**
 
-## Expérience
+## Système pédagogique
 
-L’accueil présente un catalogue de roadmaps par métier. La carte utilise un véritable graphe de 22 compétences et 42 liens de prérequis, avec zoom, survol des relations et panneau latéral. Chaque spécialisation affiche sa sous-roadmap avec tous ses prérequis transitifs.
+La validation ne dépend pas du nombre de vidéos vues. Chaque skill gate suit la même boucle :
 
-- Onboarding en trois étapes : expérience, objectif et rythme.
-- Parcours principal avec prochaine compétence disponible, 17 modules essentiels et 5 modules de spécialisation.
-- Carte de compétences interactive, filtres, recherche, vue liste et prérequis explicites.
-- Fiches : objectifs, pratique en lab, ressources, trois critères de maîtrise et preuve écrite.
-- Validation dépendante des prérequis ; rouvrir un acquis rouvre ses dépendants.
-- Trois projets de portfolio et six voies de spécialisation.
-- Ateliers d'analyse de chaînes de risques : preuves, télémétrie, ruptures et corrections.
-- Notes, progression locale, migration depuis `osr-progress-v2`, export/import JSON.
-- Navigation mobile et clavier, dialogs natifs, états vides et erreurs de stockage.
-- Adaptateur Supabase pour connexion par e-mail et sauvegarde/restauration explicite. **Les comptes ne sont pas activés sans configuration externe.** Voir `docs/ACCOUNTS.md`.
+**Comprendre → Pratiquer → Échouer → Diagnostiquer → Refaire → Documenter → Démontrer**
 
-Les contenus proposent une structure de formation et renvoient vers des ressources externes ; ce site n'héberge pas de machines de laboratoire et ne délivre pas de certification. Les durées historiques sont indicatives.
+Un module n'est considéré acquis que lorsque ses prérequis sont validés, ses trois critères de maîtrise sont cochés et une preuve est documentée.
+
+## 6 phases / 50 skill gates
+
+1. **Reconstruction technique** — Linux, Windows, réseau, HTTP, FORGE, notes, crypto.
+2. **Pentest operator** — méthodologie, Nmap, footprinting, vulnérabilités, credentials, Linux/Windows PrivEsc.
+3. **Web & API exploitation** — Burp, injections, auth, XSS, SSRF, API, OAuth/JWT, HTTP avancé, whitebox.
+4. **Enterprise & Active Directory** — AD, Kerberos/NTLM, BloodHound reasoning, attack paths, AD CS, pivoting, engagements internes.
+5. **Engineering & spécialités** — cloud, containers, C/assembly, reverse, exploit development, mobile, wireless/IoT.
+6. **Red/Purple & maîtrise professionnelle** — Red Team planning, detection-aware tradecraft, detection engineering, DFIR, recherche, tooling, portfolio et master capstone.
+
+## Jalons personnels
+
+- CAPT comme checkpoint intermédiaire.
+- CPTS comme objectif professionnel majeur, pas comme destination finale.
+- 50 machines et 60 challenges documentés.
+- 4 Pro Labs ou environnements multi-hôtes équivalents.
+- Web/API profond avec PortSwigger et whitebox.
+- FORGE 40 : quarante projets d'intégration.
+- Capstone final multi-segments avec attaque, preuve, détection, remédiation et retest.
+
+## Fonctionnalités
+
+- Skill Graph avec prérequis réels et largeur adaptative.
+- Prochaine compétence calculée automatiquement.
+- 10 jalons majeurs et FORGE 40.
+- 8 branches : Web/API, Internal/AD, Red Team, Cloud, Exploit/Research, Purple, Mobile, Wireless/IoT.
+- Fiches détaillées : comprendre, pratiquer, démontrer.
+- Notes et preuves locales.
+- Export/import JSON.
+- Compte Supabase facultatif si configuré.
+- Build statique et GitHub Pages.
+
+## Ressources de référence
+
+La roadmap privilégie les sources primaires et plateformes de pratique reconnues : Hack The Box Academy, PortSwigger Web Security Academy, Microsoft Learn, MITRE ATT&CK, OWASP, NIST, pwn.college, CryptoHack et documentations officielles.
 
 ## Développement
 
-Node.js 22 ou supérieur.
+Node.js 22+.
 
 ```sh
 npm ci
@@ -32,28 +58,18 @@ npm run build
 python3 -m http.server 4173 --directory dist
 ```
 
-Ouvrir http://localhost:4173. Reconstruire après modification. Pas de framework ou backend requis pour le parcours local. La seule dépendance runtime est le SDK d'authentification, intégré au bundle par esbuild.
-
 ## Architecture
 
-- `roadmap-data.js` : curriculum initial conservé et compatible avec ses identifiants.
-- `src/curriculum.js` : graphe de prérequis, critères, projets, spécialisations et ateliers.
-- `src/graph.js` : disposition du graphe acyclique et rendu des relations réelles.
-- `assets/app.js` : bundle généré, conservé pour la compatibilité avec la publication Pages depuis la branche.
-- `src/state.js` : validation des données, migration, choix du prochain module et invalidation des dépendances.
-- `src/app.js` : rendu, navigation hash, onboarding et interactions.
-- `src/auth.js` : adaptateur Supabase, connexion PKCE et sauvegardes explicites.
-- `styles.css` : système visuel Lumina Academy responsive.
-- `config.js` : configuration publique, vide par défaut.
-- `scripts/build.mjs` : génération des seuls fichiers publics dans `dist`.
-- `tests/state.test.mjs` : intégrité du graphe, progression, migration et imports.
-- `tests/browser.cjs` : recette navigateur (nécessite Playwright et Chromium).
-- `docs/` : audit et configuration des comptes.
+- `src/curriculum.js` — source unique du curriculum, prérequis, branches, jalons et FORGE 40.
+- `src/app.js` — UX, routes, onboarding, progression et vues.
+- `src/graph.js` — graphe adaptatif des dépendances.
+- `src/state.js` — persistance, migration et validation.
+- `src/auth.js` — synchronisation optionnelle Supabase.
+- `styles.css` — design system responsive.
+- `tests/state.test.mjs` — intégrité du curriculum et de la progression.
+- `tests/browser.cjs` — recette navigateur Playwright.
+- `scripts/build.mjs` — génération du site statique dans `dist/`.
 
-## Publication
+## Cadre d'usage
 
-Le workflow `.github/workflows/pages.yml` teste et construit le site puis déploie **dist/** via GitHub Pages. Le dépôt possède également une publication Pages automatique depuis la branche : le bundle `assets/app.js` est donc versionné et rafraîchi par chaque build, pour que les deux mécanismes publient une application fonctionnelle. Recommandation d’administration : sélectionner GitHub Actions comme source unique lorsque cette configuration sera accessible. Le workflow de pull request exécute les mêmes tests et le build sans déployer. Les anciens chemins `roadmap.html`, `tracks.html`, `resources.html` et ancres d'étape redirigent vers les nouvelles vues. Les routes hash supportent rechargements et sous-répertoire `/roadmap/`.
-
-## Données et confidentialité
-
-Sans configuration des comptes, les notes restent dans le localStorage du navigateur. Les sauvegardes JSON sont des données personnelles : éviter secrets, identifiants, informations clients ou preuves sensibles. Les polices Google Fonts sont chargées si disponibles, avec une pile système de secours. GitHub Pages et les ressources externes disposent de leurs propres politiques de collecte.
+Le contenu offensif est prévu pour CTFs, labs, machines personnelles, plateformes d'entraînement et missions explicitement autorisées. La roadmap intègre systématiquement preuve, télémétrie, détection, correction et retest afin de construire une compétence professionnelle complète.
